@@ -27,9 +27,9 @@ resource "esxi_guest" "appserver" {
   }
 
   guestinfo = {
-    "metadata"          = filebase64("cloudinit/appserver/metadata.yaml")
+    "metadata"          = filebase64("../cloudinit/appserver/metadata.yaml")
     "metadata.encoding" = "base64"
-    "userdata"          = filebase64("cloudinit/userdata.yaml")
+    "userdata"          = filebase64("../cloudinit/userdata.yaml")
     "userdata.encoding" = "base64"
   }
 }
