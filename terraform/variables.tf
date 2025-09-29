@@ -15,7 +15,7 @@ variable "esxi_username" {
 }
 
 variable "esxi_password" { # Unspecified will prompt
-    default = "Welkom01!"
+  default = "Welkom01!"
 }
 
 variable "ovf_file" {
