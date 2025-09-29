@@ -9,6 +9,7 @@ on:
     paths:
       - '**/*.tf'
       - '**/*.tfvars'
+  workflow_dispatch:
    
 jobs:
   lint_test:
