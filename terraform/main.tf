@@ -55,6 +55,6 @@ EOF
 
 output "ips" {
   value = {
-    appserver   = esxi_guest.appserver.ip_address
+    appserver = esxi_guest.appserver.ip_address
   }
 }
