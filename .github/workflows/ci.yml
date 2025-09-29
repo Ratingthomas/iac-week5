@@ -2,10 +2,13 @@ name: Week 5 CI/CD
 
 on:
   push:
-    branches: ["main"]
+    paths:
+      - '**/*.tf'
+      - '**/*.tfvars'
   pull_request:
-    branches: ["main"]
-  workflow_dispatch:
+    paths:
+      - '**/*.tf'
+      - '**/*.tfvars'
    
 jobs:
   lint_test:
@@ -25,16 +28,44 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest ansible ansible-lint
 
+      - name: Terraform fmt & validate
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: Terraform init (no backend)
+        working-directory: terraform
+        run: terraform init -backend=false
+
+      - name: Terraform fmt
+        working-directory: terraform
+        run: terraform fmt -check -diff
+
+      - name: Terraform validate
+        working-directory: terraform
+        run: terraform validate
+
       - name: Ansible lint
         run: ansible-lint ansible/02_apache.yml
   deploy:
-    name: Deploy de ansible-lint
+    name: Deploy ansible & terraform
     runs-on: self-hosted
     needs: [lint_test]
     if: ${{ success() }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: Terraform Apply (create success Issue)
+        working-directory: terraform
+        run: |
+          terraform init -input=false
+          terraform apply -auto-approve -input=false
 
       - name: Run Ansible
         run: |

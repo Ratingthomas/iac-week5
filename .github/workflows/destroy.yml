@@ -1,0 +1,20 @@
+name: Destroy infrastructuur
+
+on:
+  workflow_dispatch:   # Alleen zelf starten
+
+jobs:
+  destroy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Destroy
+        run: terraform destroy -auto-approve

@@ -1,2 +1,5 @@
 .ansible
 .vscode
+
+.terraform
+.terraform.lock.hcl

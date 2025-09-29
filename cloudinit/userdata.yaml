@@ -1,0 +1,12 @@
+#cloud-config
+users:
+  - name: thomas
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1vJ3IAgRfVB5+R6ArQe/ultBRTPzeVzhaYUcD9w73S student@Ubuntu2404ServerGold-mcm42368-305369616740
+    shell: /bin/bash
+    groups: sudo
+    sudo: ALL=(ALL) NOPASSWD:ALL
+
+packages:
+  - wget
+  
