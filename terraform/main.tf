@@ -15,7 +15,7 @@ provider "esxi" {
 }
 
 resource "esxi_guest" "appserver" {
-  guest_name = "week5-server"
+  guest_name = "week5-appserver"
   disk_store = "datastore1"
 
   memsize  = "2048"

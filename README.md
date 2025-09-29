@@ -14,3 +14,6 @@ Wanneer het playbook een tweede keer gedraaid:
 
 En wanneer er expres een fout zit in het playbook ontstaat het volgende resultaat:
 ![Opdracht 1](images/opdracht_1_2.png)
+
+## Opdracht 2 & 3
+Maak een verandering in `terraform/main.tf` en de workflow zou automatisch starten.
