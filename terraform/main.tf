@@ -37,7 +37,7 @@ resource "esxi_guest" "appserver" {
 resource "null_resource" "save_ips" {
   provisioner "local-exec" {
     command = <<EOT
-cat > inventory.ini<< EOF
+cat > ../inventory.ini<< EOF
 [all]
 ${esxi_guest.appserver.ip_address}
 
