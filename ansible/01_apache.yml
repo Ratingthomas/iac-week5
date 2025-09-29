@@ -1,0 +1,21 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Installeer apache zonder apt.
+      shell: apt-get update && apt-get install -y apache2
+      args:
+        creates: /usr/sbin/apache2
+
+    - name: Installeer apache3 zonder apt.
+      shell: apt-get update && apt-get install -y apache3
+      args:
+        creates: /usr/sbin/apache3
+      register: apache3_result
+      ignore_errors: true
+
+    - name: Show debug message after failure
+      debug:
+        msg: "De vorige taak is gefaald"
+      when: apache3_result is failed
